@@ -197,6 +197,10 @@ abstract class MapLibreGlPlatform {
   Future<void> addSource(String sourceId, SourceProperties properties);
 
   Future<void> setLayerVisibility(String layerId, bool visible);
+  // added my ckam
+  Future<void> setLayerIconRotate(String layerId, double rotation);
+  // added my ckam
+  Future<void> setLayerIconImage(String layerId, String image);
 
   @mustCallSuper
   void dispose() {

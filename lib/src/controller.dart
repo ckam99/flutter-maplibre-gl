@@ -1380,6 +1380,21 @@ class MaplibreMapController extends ChangeNotifier {
         .toList();
   }
 
+  /// Change symbol layer iconRotation
+  ///
+  /// This method is implemented only symbolLayer
+  Future<void> setLayerIconRotate(String layerId, double rotation) async {
+    return _maplibreGlPlatform.setLayerIconRotate(layerId, rotation);
+  }
+  
+  /// Change symbol layer iconImage
+  ///
+  /// This method is implemented only symbolLayer
+  Future<void> setLayerIconImage(String layerId, String image) async {
+    return _maplibreGlPlatform.setLayerIconImage(layerId, image);
+  }
+
+
   @override
   void dispose() {
     super.dispose();
