@@ -1466,6 +1466,56 @@ final class MapboxMapController
           break;
 
         }
+        case "layer#setIconRotate":
+        {
+
+          if (style == null) {
+            result.error(
+                "STYLE IS NULL",
+                "The style is null. Has onStyleLoaded() already been invoked?",
+                null);
+          }
+          String layerId = call.argument("layerId");
+          double rotation = call.argument("rotation");
+
+          Layer layer = style.getLayer(layerId);
+          if (layer == null) {
+            result.error(
+                "layer IS NULL",
+                "The layer is null. ID: "+layerId ,
+                null);
+          }
+
+          layer.setProperties(PropertyFactory.iconRotate((float)rotation));
+          result.success(null);
+          break;
+
+        }
+        case "layer#setIconImage":
+        {
+
+          if (style == null) {
+            result.error(
+                "STYLE IS NULL",
+                "The style is null. Has onStyleLoaded() already been invoked?",
+                null);
+          }
+          String layerId = call.argument("layerId");
+          String image = call.argument("image");
+
+          Layer layer = style.getLayer(layerId);
+          if (layer == null) {
+            result.error(
+                "layer IS NULL",
+                "The layer is null. ID: "+layerId ,
+                null);
+          }
+
+          layer.setProperties(PropertyFactory.iconImage(image));
+          result.success(null);
+          break;
+
+        }
         case "map#querySourceFeatures":
         {
           Map<String, Object> reply = new HashMap<>();

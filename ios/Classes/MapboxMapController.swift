@@ -825,7 +825,31 @@ class MapboxMapController: NSObject, FlutterPlatformView, MGLMapViewDelegate, Ma
             }
             layer.isVisible = visible
             result(nil)
+                        
+
+        case "layer#setIconRotate":
+            guard let arguments = methodCall.arguments as? [String: Any] else { return }
+            guard let layerId = arguments["layerId"] as? String else { return }
+            guard let rotation = arguments["rotation"] as? Float else { return }
+            if let layer = mapView.style?.layer(withIdentifier: layerId) {
+                if let symbolLayer = layer as? MGLSymbolStyleLayer {
+                    symbolLayer.iconRotation = NSExpression(forConstantValue: rotation)
+                }
+            }
+            result(nil)
             
+
+        case "layer#setIconImage":
+            guard let arguments = methodCall.arguments as? [String: Any] else { return }
+            guard let layerId = arguments["layerId"] as? String else { return }
+            guard let image = arguments["image"] as? String else { return }
+            if let layer = mapView.style?.layer(withIdentifier: layerId) {
+                if let symbolLayer = layer as? MGLSymbolStyleLayer {
+                    symbolLayer.iconImageName = NSExpression(forConstantValue: image)
+                }
+            }
+            result(nil)
+           
         case "map#querySourceFeatures":
             guard let arguments = methodCall.arguments as? [String: Any] else { return }
             guard let sourceId = arguments["sourceId"] as? String else { return }

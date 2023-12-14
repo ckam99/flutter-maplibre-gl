@@ -1152,4 +1152,15 @@ class MaplibreMapController extends MapLibreGlPlatform
   Future<List> getSourceIds() async {
     throw UnimplementedError();
   }
+
+  // added my ckam
+  @override
+  Future<void> setLayerIconImage(String layerId, String image) async {
+     _map.setLayoutProperty(layerId, 'icon-image', image);
+  }
+  // added my ckam  
+  @override
+  Future<void> setLayerIconRotate(String layerId, double rotation) async{
+    _map.setLayoutProperty(layerId, 'icon-rotate', rotation);
+  }
 }

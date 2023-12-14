@@ -813,4 +813,21 @@ class MethodChannelMaplibreGl extends MapLibreGlPlatform {
       return new Future.error(e);
     }
   }
+
+  // added my ckam
+  @override
+  Future<void> setLayerIconImage(String layerId, String image) async {
+   await _channel.invokeMethod('layer#setIconImage', <String, dynamic>{
+      'layerId': layerId,
+      'image': image,
+    });
+  }
+  // added my ckam
+  @override
+  Future<void> setLayerIconRotate(String layerId, double rotation) async{
+    await _channel.invokeMethod('layer#setIconRotate', <String, dynamic>{
+      'layerId': layerId,
+      'rotation': rotation,
+    });
+  }
 }
