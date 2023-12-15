@@ -830,10 +830,11 @@ class MapboxMapController: NSObject, FlutterPlatformView, MGLMapViewDelegate, Ma
         case "layer#setIconRotate":
             guard let arguments = methodCall.arguments as? [String: Any] else { return }
             guard let layerId = arguments["layerId"] as? String else { return }
-            guard let rotation = arguments["rotation"] as? Float else { return }
+            guard let rotation = arguments["rotation"] as? Double else { return }
             if let layer = mapView.style?.layer(withIdentifier: layerId) {
                 if let symbolLayer = layer as? MGLSymbolStyleLayer {
-                    symbolLayer.iconRotation = NSExpression(forConstantValue: rotation)
+                    symbolLayer.iconRotation = NSExpression(forConstantValue: NSNumber(value: rotation))
+                    // symbolLayer.iconRotation = NSExpression(forConstantValue: rotation)
                 }
             }
             result(nil)
