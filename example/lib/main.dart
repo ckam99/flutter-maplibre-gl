@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:maplibre_gl_example/attribution.dart';
+import 'package:maplibre_gl_example/basic.dart';
 import 'package:maplibre_gl_example/get_map_informations.dart';
 import 'package:maplibre_gl_example/given_bounds.dart';
 import 'package:maplibre_gl_example/localized_map.dart';
@@ -124,5 +125,5 @@ class _MapsDemoState extends State<MapsDemo> {
 }
 
 void main() {
-  runApp(const MaterialApp(home: MapsDemo()));
+  runApp(const MaterialApp(home: BasicMap()));
 }
