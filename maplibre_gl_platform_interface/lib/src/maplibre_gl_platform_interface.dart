@@ -201,6 +201,13 @@ abstract class MapLibreGlPlatform {
   Future<void> setLayerIconRotate(String layerId, double rotation);
   // added my ckam
   Future<void> setLayerIconImage(String layerId, String image);
+    // added my ckam
+  Future<void> easeTo(LatLng coordinates, double zoomLevel);
+  // added my ckam
+  Future<void> zoomIn();
+  // added my ckam
+  Future<void> zoomOut();
+
 
   @mustCallSuper
   void dispose() {

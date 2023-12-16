@@ -1394,6 +1394,19 @@ class MaplibreMapController extends ChangeNotifier {
     return _maplibreGlPlatform.setLayerIconImage(layerId, image);
   }
 
+    // added my ckam
+  Future<void> easeTo(LatLng coordinates, double zoomLevel) async {
+    return _maplibreGlPlatform.easeTo(coordinates, zoomLevel);
+  }
+  // added my ckam
+  Future<void> zoomIn() async {
+    return _maplibreGlPlatform.zoomIn();
+  }
+  // added my ckam
+  Future<void> zoomOut() async {
+    return _maplibreGlPlatform.zoomOut();
+  }
+
 
   @override
   void dispose() {

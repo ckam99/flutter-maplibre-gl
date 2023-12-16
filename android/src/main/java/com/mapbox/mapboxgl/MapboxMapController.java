@@ -846,6 +846,27 @@ final class MapboxMapController
           }
           break;
         }
+      case "camera#zoomIn":
+        {
+          zoomIn();
+          result.success(null);
+          break;
+        }
+      case "camera#zoomOut":
+        {
+          zoomOut();
+          result.success(null);
+          break;
+        }
+      case "camera#easeTo":
+        {
+          double zoomLevel = call.argument("zoomLevel");
+          List<Double> coordinates = call.argument("coordinates");
+          LatLng center = new LatLng(coordinates.get(0), coordinates.get(1));
+          easeTo(center, zoomLevel);
+          result.success(null);
+          break;
+        }
       case "map#queryRenderedFeatures":
         {
           Map<String, Object> reply = new HashMap<>();
@@ -2213,5 +2234,31 @@ final class MapboxMapController
     public void onMoveEnd(MoveGestureDetector detector, float velocityX, float velocityY) {
       MapboxMapController.this.onMoveEnd(detector);
     }
+  }
+  
+  public void easeTo(LatLng center, double zoomLevel) {
+    CameraPosition cameraPosition = new CameraPosition.Builder(mapboxMap.getCameraPosition())
+            .target(center)
+            .zoom(zoomLevel)
+            .build();
+    mapboxMap.easeCamera(
+            CameraUpdateFactory.newCameraPosition(cameraPosition), 300);
+  }
+
+  public void zoomIn() {
+      setZoomLevel(mapboxMap.getCameraPosition().zoom + 1);
+  }
+
+  public void zoomOut() {
+      setZoomLevel(mapboxMap.getCameraPosition().zoom - 1);
+  }
+
+  private void setZoomLevel(double zoomLevel) {
+      CameraPosition cameraPosition = new CameraPosition.Builder(mapboxMap.getCameraPosition())
+              .zoom(zoomLevel)
+              .build();
+      mapboxMap.easeCamera(
+              CameraUpdateFactory.newCameraPosition(cameraPosition), 300
+      );
   }
 }

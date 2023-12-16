@@ -53,6 +53,15 @@ class _BasicMapState extends State<BasicMap> {
   //  await _map.setLayerIconImage("layerId", "marker");
  }
 
+   void _zoomIn() async {
+    _map.zoomIn();
+  }
+
+  void _zoomOut() async {
+    _map.zoomOut();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     final MaplibreMap _MapView = MaplibreMap(
@@ -71,11 +80,23 @@ class _BasicMapState extends State<BasicMap> {
 
     return Scaffold(
       body: _MapView,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () =>  {
-          _rotateLayer()
-        },
-        child: const Icon(Icons.place),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          
+          FloatingActionButton(
+            onPressed: _rotateLayer,
+            child: const Icon(Icons.place),
+          ),
+          FloatingActionButton(
+            onPressed: _zoomIn,
+            child: const Icon(Icons.add),
+          ),
+          FloatingActionButton(
+            onPressed: _zoomOut,
+            child: const Icon(Icons.remove),
+          )
+        ],
       ),
     );
   }

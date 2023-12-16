@@ -830,4 +830,23 @@ class MethodChannelMaplibreGl extends MapLibreGlPlatform {
       'rotation': rotation,
     });
   }
+
+    
+  @override
+  Future<void> easeTo(LatLng coordinates, double zoomLevel) async {
+    await _channel.invokeMethod('camera#easeTo', <String, dynamic>{
+      'coordinates': [coordinates.latitude, coordinates.longitude],
+      'zoomLevel': zoomLevel,
+    });
+  }
+  
+  @override
+  Future<void> zoomIn() async {
+    await _channel.invokeMethod('camera#zoomIn');
+  }
+  
+  @override
+  Future<void> zoomOut() async {
+    await _channel.invokeMethod('camera#zoomOut');
+  }
 }
