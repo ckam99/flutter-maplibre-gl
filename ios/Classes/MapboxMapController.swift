@@ -344,6 +344,22 @@ class MapboxMapController: NSObject, FlutterPlatformView, MGLMapViewDelegate, Ma
                 mapView.setCamera(camera, animated: true)
                 completion()
             }
+        case "camera#zoomIn":
+            zoomIn()
+            result(nil)
+        case "camera#zoomOut":
+            zoomOut()
+            result(nil)
+        case "camera#easeTo":
+            guard let arguments = methodCall.arguments as? [String: Any] else { return }
+            guard let coordinates = arguments["coordinates"] as? [Double] else { return }
+            guard let zoomLevel = arguments["zoomLevel"] as? Double else { return }
+            let center = CLLocationCoordinate2D(
+                latitude: coordinates[0],
+                longitude: coordinates[1]
+            )
+            easeTo(center: center,  zoomLevel: zoomLevel)
+            result(nil)
         case "symbolLayer#add":
             guard let arguments = methodCall.arguments as? [String: Any] else { return }
             guard let sourceId = arguments["sourceId"] as? String else { return }
@@ -1739,6 +1755,26 @@ class MapboxMapController: NSObject, FlutterPlatformView, MGLMapViewDelegate, Ma
 
     func setAttributionButtonPosition(position: MGLOrnamentPosition) {
         mapView.attributionButtonPosition = position
+    }
+
+    // 
+    func zoomIn() {
+        let zoom = mapView.zoomLevel + 1
+        setZoomLevel(zoomLevel: zoom)
+    }
+    
+    func zoomOut() {
+        let zoom = mapView.zoomLevel - 1
+        setZoomLevel(zoomLevel: zoom)
+    }
+    
+    func easeTo(center: CLLocationCoordinate2D,  zoomLevel: Double) {
+        mapView.setCenter(center, zoomLevel: zoomLevel, animated: true)
+        // easeTo(center: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0), zoomLevel: 0)
+    }
+
+    private func setZoomLevel(zoomLevel: Double) {
+        mapView.setCenter(mapView.centerCoordinate, zoomLevel: zoomLevel, animated: true)
     }
 }
 
